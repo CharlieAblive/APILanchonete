@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.lanchoneteAPI.model.ClienteModel;
+import com.example.lanchoneteAPI.model.ProdutoModel;
 import com.example.lanchoneteAPI.service.ClienteService;
 
 
@@ -33,27 +34,37 @@ public ResponseEntity<List<ClienteModel>> listarTodos(ClienteModel cliente){
   // return null;
 //}
 
+@GetMapping("/{id}")
+public ResponseEntity<ClienteModel> buscarPorId(@PathVariable int id){
+    ClienteModel cliente = clienteService.buscarPorId(id); 
+        if(cliente != null){
+            return ResponseEntity.ok(cliente);
+        }
+        return ResponseEntity.notFound().build();
+}
+
+
 @GetMapping("/indisponiveis")
-public ResponseEntity<List<ClienteModel>> listarIndisponiveis(ClienteModel Cliente){
-    if (!Cliente.isAtivo()){
-    List<ClienteModel> Clientes = clienteService.listarTodos();
-    return ResponseEntity.ok(Clientes);
+public ResponseEntity<List<ClienteModel>> listarIndisponiveis(ClienteModel cliente){
+    if (!cliente.isAtivo()){
+    List<ClienteModel> clientes = clienteService.listarTodos();
+    return ResponseEntity.ok(clientes);
     }
     return null;
 }
 
 @PostMapping 
-public ResponseEntity<ClienteModel> adicionarCliente(@RequestBody ClienteModel Cliente ){
-    ClienteModel ClienteSalvo = clienteService.adicionarCliente(Cliente);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ClienteSalvo);
+public ResponseEntity<ClienteModel> adicionarCliente(@RequestBody ClienteModel cliente ){
+    ClienteModel clienteSalvo = clienteService.adicionarCliente(cliente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(clienteSalvo);
 }
 
 
 @PutMapping("/{id}")
-public ResponseEntity<ClienteModel> atualizarCliente(@PathVariable int id,  @RequestBody ClienteModel Cliente){
-    ClienteModel ClienteAtualizado = clienteService.atualizarCliente(id, Cliente);
-        if(ClienteAtualizado != null){
-            return ResponseEntity.ok(ClienteAtualizado);
+public ResponseEntity<ClienteModel> atualizarCliente(@PathVariable int id,  @RequestBody ClienteModel cliente){
+    ClienteModel clienteAtualizado = clienteService.atualizarCliente(id, cliente);
+        if(clienteAtualizado != null){
+            return ResponseEntity.ok(clienteAtualizado);
         }
         return ResponseEntity.notFound().build();
 }

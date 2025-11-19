@@ -1,5 +1,7 @@
 package com.example.lanchoneteAPI.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,7 +34,7 @@ private String telefone;
 //private Endereco endereco;
 
 @Column(nullable = false)
-private String data;
+private String data = LocalDate.now().toString();
 
 @Column(nullable = false)
 private boolean ativo = true;

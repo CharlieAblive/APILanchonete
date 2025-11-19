@@ -44,6 +44,8 @@ public class ClienteService {
         if (clienteExiste.isPresent()){
             ClienteModel cliente = clienteExiste.get();
             cliente.setNomeCompleto(clienteAtualizado.getNomeCompleto());
+            cliente.setTelefone(clienteAtualizado.getTelefone());
+            cliente.setPreferencias(clienteAtualizado.getPreferencias());
             //cliente.setEndereco(clienteAtualizado.getEndereco());
                 return clienteRepository.save(cliente);
         } 
