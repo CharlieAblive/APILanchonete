@@ -1,8 +1,8 @@
 package com.example.lanchoneteAPI.model;
 
 import java.time.LocalDate;
-
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,8 +30,8 @@ private String email;
 @Column(nullable = false)
 private String telefone;
 
-//@Column(nullable = false)
-//private Endereco endereco;
+@Embedded
+private Endereco endereco;
 
 @Column(nullable = false)
 private String data = LocalDate.now().toString();
@@ -46,7 +46,7 @@ private String preferencias;
 private String histCompra;
 
 @Column(nullable = false)
-private Long cpf;
+private String cpf;
 
 @Column(nullable = false)
 private String pedidos;
@@ -57,13 +57,13 @@ public ClienteModel(){
 }
 
 
-public ClienteModel(int id, String nomeCompleto, String email, String telefone, String data,
-        boolean ativo, String preferencias, String histCompra, Long cpf, String pedidos) {
+public ClienteModel(int id, String nomeCompleto, String email, Endereco endereco, String telefone, String data,
+        boolean ativo, String preferencias, String histCompra, String cpf, String pedidos) {
     this.id = id;
     this.nomeCompleto = nomeCompleto;
     this.email = email;
     this.telefone = telefone;
-    //this.endereco = endereco;
+    this.endereco = endereco;
     this.data = data;
     this.ativo = ativo;
     this.preferencias = preferencias;
