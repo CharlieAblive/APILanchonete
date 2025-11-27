@@ -1,4 +1,6 @@
 package com.example.lanchoneteAPI.model;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import lombok.Setter;
 @Table(name = "produtos")
 @Getter
 @Setter
+@CrossOrigin(origins = "*")
 public class ProdutoModel {
 
 @Id
